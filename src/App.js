@@ -6,6 +6,9 @@ import { Fragment, useEffect } from "react";
 import { checkoutActions } from "./store/cart";
 import Notification from "./components/UI/Notification";
 
+
+let isInitial = true;
+
 function App() {
   const dispatch = useDispatch();
   const showCart = useSelector((state) => state.cart.isCheckout);
@@ -14,6 +17,11 @@ function App() {
 
   useEffect(() => {
     const sendCartData = async () => {
+      if(isInitial){
+        isInitial = false;
+        return;
+      }
+
       dispatch(
         checkoutActions.showNotification({
           status: "pending",
@@ -41,6 +49,9 @@ function App() {
         })
       );
     };
+
+    
+
     sendCartData().catch((error) => {
       dispatch(
         checkoutActions.showNotification({
