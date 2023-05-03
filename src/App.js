@@ -14,14 +14,20 @@ function App() {
   const cart = useSelector((state) => state.cartFunction);
   const notification = useSelector((state) => state.cart.notification);
 
+  useEffect(()=> {
+    dispatch(fetchCartData());
+  },[dispatch]);
+
   useEffect(() => {
       if(isInitial){
         isInitial = false;
-        dispatch(fetchCartData());
         return;
       }
 
+      if(cart.changed){
       dispatch(sendCartData(cart));
+      }
+
    
   }, [cart, dispatch]);
 

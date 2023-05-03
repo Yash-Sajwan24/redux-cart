@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialCheckout = {
-    isCheckout: false, 
+    isCheckout: true, 
     notification: null, 
 };
 
